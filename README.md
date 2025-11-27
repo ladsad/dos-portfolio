@@ -1,16 +1,57 @@
-# React + Vite
+# DOS-Style Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, built with React and Vite.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [https://ladsad.github.io/dos-portfolio/](https://ladsad.github.io/dos-portfolio/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🖥️ Features
 
-## React Compiler
+-   **Interactive Terminal**: A fully functional command-line interface with custom commands (`about`, `projects`, `skills`, `open <project>`).
+-   **Windows 98 GUI**: Authentic desktop experience with a Start Menu, Taskbar, and System Tray.
+-   **Window Management**: Draggable, resizable, minimizable, and focusable windows.
+-   **Project Dashboard**: Detailed project views with ASCII art headers and rich text descriptions.
+-   **Resume Viewer**: A dedicated "paper-style" PDF viewer for showcasing your CV.
+-   **Mobile Responsive**: Adaptive layout that works seamlessly on phones and tablets.
+-   **Easter Eggs**: BIOS boot sequence, "Press DEL for Setup", and more.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+-   **Frontend**: React 19, Vite
+-   **Styling**: Vanilla CSS (No frameworks, pure retro styling)
+-   **Libraries**:
+    -   `react-draggable`: For window management.
+    -   `lucide-react`: For icons.
+    -   `react-markdown`: For rendering project content.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Installation
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/ladsad/dos-portfolio.git
+    cd dos-portfolio
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**:
+    ```bash
+    npm run dev
+    ```
+
+4.  **Build for production**:
+    ```bash
+    npm run build
+    ```
+
+## 📦 Deployment
+
+This project is configured for deployment on **GitHub Pages**.
+
+For detailed deployment instructions, please refer to [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
