@@ -88,21 +88,18 @@ const WindowManager = () => {
     // Periodic Tip Interval
     useEffect(() => {
         const interval = setInterval(() => {
-            // 30% chance to show a tip every 2 minutes to not be too annoying?
-            // User asked for 2-3 min. Let's do fixed 2.5 minutes.
             const randomTip = tips[Math.floor(Math.random() * tips.length)];
             setCurrentTip(randomTip);
             setShowTip(true);
             playDing();
-        }, 50000); // 2.5 minutes
+        }, 50000);
 
-        // Also show one on first load after a short delay?
         const initialTimeout = setTimeout(() => {
             const randomTip = tips[Math.floor(Math.random() * tips.length)];
             setCurrentTip(randomTip);
             setShowTip(true);
             playDing();
-        }, 10000); // 10 seconds after load
+        }, 10000);
 
         return () => {
             clearInterval(interval);
