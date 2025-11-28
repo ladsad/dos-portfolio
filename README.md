@@ -2,7 +2,7 @@
 
 A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, built with React and Vite.
 
-🔗 **Live Demo:** [https://ladsad.github.io/dos-portfolio/](https://ladsad.github.io/dos-portfolio/)
+**Live Demo:** [https://ladsad.github.io/dos-portfolio/](https://ladsad.github.io/dos-portfolio/)
 
 ## Features
 
