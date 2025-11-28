@@ -64,7 +64,15 @@ const ProjectDetail = ({ project }) => {
                     <div className="panel content-viewer">
                         <div className="panel-header">CONTENT VIEWER v1.0</div>
                         <div className="panel-content markdown-body">
-                            <ReactMarkdown>{project.content || "No detailed content available."}</ReactMarkdown>
+                            <ReactMarkdown
+                                components={{
+                                    a: ({ node, ...props }) => (
+                                        <a {...props} target="_blank" rel="noopener noreferrer" />
+                                    )
+                                }}
+                            >
+                                {project.content || "No detailed content available."}
+                            </ReactMarkdown>
                         </div>
                     </div>
                 </div>
