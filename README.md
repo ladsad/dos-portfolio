@@ -4,7 +4,7 @@ A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, bui
 
 🔗 **Live Demo:** [https://ladsad.github.io/dos-portfolio/](https://ladsad.github.io/dos-portfolio/)
 
-## 🖥️ Features
+## Features
 
 -   **Interactive Terminal**: A fully functional command-line interface with custom commands (`about`, `projects`, `skills`, `open <project>`).
 -   **Windows 98 GUI**: Authentic desktop experience with a Start Menu, Taskbar, and System Tray.
@@ -14,7 +14,7 @@ A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, bui
 -   **Mobile Responsive**: Adaptive layout that works seamlessly on phones and tablets.
 -   **Easter Eggs**: BIOS boot sequence, "Press DEL for Setup", and more.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 -   **Frontend**: React 19, Vite
 -   **Styling**: Vanilla CSS (No frameworks, pure retro styling)
@@ -23,7 +23,24 @@ A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, bui
     -   `lucide-react`: For icons.
     -   `react-markdown`: For rendering project content.
 
-## 🚀 Installation
+## Project Structure
+
+```
+src/
+├── components/         # React components
+│   ├── BiosSetup.jsx   # Easter egg: BIOS setup screen
+│   ├── StartMenu.jsx   # Windows 98 Start Menu logic
+│   ├── Taskbar.jsx     # Taskbar with clock and window list
+│   ├── Terminal.jsx    # Interactive command-line interface
+│   ├── Window.jsx      # Draggable/Resizable window wrapper
+│   └── ...
+├── data/
+│   └── portfolio.js    # Centralized content (projects, resume, etc.)
+├── App.jsx             # Main application layout
+└── index.css           # Global retro styles (Vanilla CSS)
+```
+
+## Installation
 
 1.  **Clone the repository**:
     ```bash
@@ -46,12 +63,12 @@ A retro-themed personal portfolio website inspired by Windows 98 and MS-DOS, bui
     npm run build
     ```
 
-## 📦 Deployment
+## Deployment
 
 This project is configured for deployment on **GitHub Pages**.
 
 For detailed deployment instructions, please refer to [DEPLOYMENT.md](./DEPLOYMENT.md).
 
-## 📝 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
