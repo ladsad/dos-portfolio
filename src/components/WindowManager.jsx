@@ -7,6 +7,47 @@ import StartMenu from './StartMenu';
 import Taskbar from './Taskbar';
 import AltTabSwitcher from './AltTabSwitcher';
 import { portfolioData } from '../data/portfolio';
+import TipWidget from './TipWidget';
+
+const tips = [
+    "Press Shift+Tab to switch between windows quickly!",
+    "Type 'help' in the terminal to see all available commands.",
+    "You can drag and resize these windows just like in 1998.",
+    "This website was built with React and Vite.",
+    "Shaurya is a Full Stack Developer based in New Delhi.",
+    "Try the 'open <project>' command to jump straight to a project.",
+    "Double-click the 'Resume.txt' icon to view my CV.",
+    "The 'about' command reveals my contact information.",
+    "Maximize windows by double-clicking the title bar (just kidding, but maybe soon!).",
+    "Don't forget to shut down your computer properly via the Start Menu."
+];
+
+// Sound Effect
+const playDing = () => {
+    try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime); // A5
+        osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.1); // Drop to A4
+
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+    } catch (e) {
+        console.error("Audio play failed", e);
+    }
+};
 
 /**
  * WindowManager Component
@@ -40,6 +81,35 @@ const WindowManager = () => {
     const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
 
+    // Tip Widget State
+    const [showTip, setShowTip] = useState(false);
+    const [currentTip, setCurrentTip] = useState('');
+
+    // Periodic Tip Interval
+    useEffect(() => {
+        const interval = setInterval(() => {
+            // 30% chance to show a tip every 2 minutes to not be too annoying?
+            // User asked for 2-3 min. Let's do fixed 2.5 minutes.
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            setCurrentTip(randomTip);
+            setShowTip(true);
+            playDing();
+        }, 150000); // 2.5 minutes
+
+        // Also show one on first load after a short delay?
+        const initialTimeout = setTimeout(() => {
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            setCurrentTip(randomTip);
+            setShowTip(true);
+            playDing();
+        }, 10000); // 10 seconds after load
+
+        return () => {
+            clearInterval(interval);
+            clearTimeout(initialTimeout);
+        };
+    }, []);
+
     // Handle window resize for mobile detection
     useEffect(() => {
         const handleResize = () => {
@@ -48,8 +118,6 @@ const WindowManager = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    // Bring a window to the front
     const bringToFront = React.useCallback((id) => {
         setActiveWindowId(id);
         setWindows(prev => prev.map(w =>
@@ -277,6 +345,13 @@ const WindowManager = () => {
                 onToggleStartMenu={() => setIsStartMenuOpen(!isStartMenuOpen)}
                 onWindowClick={handleTaskbarWindowClick}
             />
+
+            {showTip && (
+                <TipWidget
+                    message={currentTip}
+                    onClose={() => setShowTip(false)}
+                />
+            )}
         </>
     );
 };
