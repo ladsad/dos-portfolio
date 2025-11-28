@@ -163,7 +163,7 @@ const WindowManager = () => {
             zIndex: nextZIndex,
             minimized: false,
             initialPosition: isMobile ? { x: 0, y: 0 } : { x: 50 + (windows.length * 20), y: 50 + (windows.length * 20) },
-            initialSize: { width: 900, height: 600 }
+            initialSize: { width: '60vw', height: '60vh' }
         };
 
         setWindows(prev => [...prev, newWindow]);
@@ -188,7 +188,7 @@ const WindowManager = () => {
                 zIndex: nextZIndex,
                 minimized: false,
                 initialPosition: isMobile ? { x: 0, y: 0 } : { x: 40, y: 40 },
-                initialSize: { width: 800, height: 700 }
+                initialSize: { width: '50vw', height: '80vh' }
             }]);
             setNextZIndex(prev => prev + 1);
             setActiveWindowId('resume');
