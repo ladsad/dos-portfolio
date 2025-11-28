@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { X, Lightbulb } from 'lucide-react';
 
 const TipWidget = ({ message, onClose }) => {
-    // Auto-close after 10 seconds if not interacted with? 
-    // No, let's keep it until user closes it, like annoying Clippy/Windows tips.
 
     return (
         <div className="tip-widget">

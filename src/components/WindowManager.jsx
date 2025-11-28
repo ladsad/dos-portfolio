@@ -94,7 +94,7 @@ const WindowManager = () => {
             setCurrentTip(randomTip);
             setShowTip(true);
             playDing();
-        }, 150000); // 2.5 minutes
+        }, 50000); // 2.5 minutes
 
         // Also show one on first load after a short delay?
         const initialTimeout = setTimeout(() => {
