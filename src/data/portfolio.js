@@ -39,6 +39,45 @@ export const portfolioData = {
   ],
   projects: [
     {
+      name: "CodeWhisper",
+      link: "https://github.com/ladsad/codewhisper",
+      category: "Developer Tools & AI",
+      highlights: [
+        "Intelligent tool for auto-generating documentation and analyzing code quality using CodeT5+",
+        "Features a VS Code extension for real-time docstring generation and a FastAPI backend with a Streamlit dashboard",
+        "Fine-tuned CodeT5-small on CodeXGLUE (Python/Java) using QLoRA for efficient model training"
+      ],
+      content: `# CodeWhisper
+
+CodeWhisper is an intelligent tool for auto-generating documentation and analyzing code quality.
+
+## Project Structure
+
+- \`backend/\`: Python FastAPI backend.
+- \`vscode-extension/\`: VS Code extension for IDE integration.
+- \`Documents/\`: Project documentation.
+
+## Features
+
+- **Code Analysis**: Calculates cyclomatic complexity, maintainability index, and detects anomalies.
+- **Auto-Documentation**: Generates docstrings using **CodeT5+** fine-tuned with **QLoRA**.
+- **Dashboard**: Visualizes project health and metrics (Streamlit MVP).
+- **VS Code Extension**: Right-click context menu for real-time documentation generation.
+
+## Model Training
+
+The documentation generation model uses **CodeT5-small** fine-tuned on **CodeXGLUE** (Python/Java) with QLoRA.
+
+### Model Performance
+
+| Metric | Score |
+| :--- | :--- |
+| **BLEU** | 36.65 |
+| **ROUGE-L** | 62.17 |
+| **BERTScore** | 0.93 |
+`
+    },
+    {
       name: "MicroSegNet Optimizer",
       link: "https://github.com/ladsad/Modified-MicroSegNet",
       category: "ML Pipeline Engineering",
@@ -677,6 +716,16 @@ Based on the project report "MUSE GAN: A MULTIVIEW MODIFIED GAN ARCHITECTURE FOR
       }
     ],
     projects: [
+      {
+        name: "CodeWhisper: Intelligent Documentation Tool",
+        link: "https://github.com/ladsad/codewhisper",
+        type: "Developer Tools",
+        points: [
+          "Developed an AI-powered tool for auto-generating documentation and code quality analysis using CodeT5+ and QLoRA",
+          "Built a VS Code extension for seamless IDE integration and a FastAPI/Streamlit backend for metrics visualization",
+          "Achieved 36.65 BLEU and 62.17 ROUGE-L scores by fine-tuning CodeT5-small on CodeXGLUE dataset"
+        ]
+      },
       {
         name: "Mustard Archives: Scalable Web Analytics",
         link: "https://github.com/ladsad/Mustard-Archives",
