@@ -8,6 +8,7 @@ import Taskbar from './Taskbar';
 import AltTabSwitcher from './AltTabSwitcher';
 import { portfolioData } from '../data/portfolio';
 import TipWidget from './TipWidget';
+import LinkedInWidget from './LinkedInWidget';
 
 const tips = [
     "Press Shift+Tab to switch between windows quickly!",
@@ -84,6 +85,9 @@ const WindowManager = () => {
     // Tip Widget State
     const [showTip, setShowTip] = useState(false);
     const [currentTip, setCurrentTip] = useState('');
+
+    // LinkedIn Widget State
+    const [showLinkedIn, setShowLinkedIn] = useState(true);
 
     // Periodic Tip Interval
     useEffect(() => {
@@ -239,6 +243,8 @@ const WindowManager = () => {
             window.location.reload();
         } else if (action === 'shutdown') {
             document.body.innerHTML = '<div style="background:black;color:orange;height:100vh;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:2rem;">IT IS NOW SAFE TO TURN OFF YOUR COMPUTER.</div>';
+        } else if (action === 'linkedin') {
+            setShowLinkedIn(true);
         }
     }, [windows, nextZIndex, isMobile, bringToFront]);
 
@@ -347,6 +353,12 @@ const WindowManager = () => {
                 <TipWidget
                     message={currentTip}
                     onClose={() => setShowTip(false)}
+                />
+            )}
+
+            {showLinkedIn && (
+                <LinkedInWidget
+                    onClose={() => setShowLinkedIn(false)}
                 />
             )}
         </>

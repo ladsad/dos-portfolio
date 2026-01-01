@@ -52,6 +52,7 @@ const StartMenu = ({ isOpen, onClose, onOpenProject, onOpenResume, onSystemActio
                     <span className="icon">[S]</span> System
                     <div className="submenu">
                         <div className="submenu-item" onClick={() => onSystemAction('terminal')}>Command Prompt</div>
+                        <div className="submenu-item" onClick={() => onSystemAction('linkedin')}>LinkedIn Profile</div>
                         <div className="submenu-item" onClick={() => onSystemAction('reboot')}>Reboot System</div>
                     </div>
                 </div>

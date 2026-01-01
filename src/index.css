@@ -1236,3 +1236,128 @@ input.cmd-input {
     cursor: nwse-resize;
     z-index: 101;
 }
+
+/* LinkedIn Widget Styles */
+.linkedin-widget {
+    position: fixed;
+    bottom: 3.125rem;
+    left: 1.25rem;
+    width: 16rem;
+    background-color: var(--dos-gray);
+    border: 0.125rem solid var(--dos-white);
+    border-right-color: var(--dos-black);
+    border-bottom-color: var(--dos-black);
+    box-shadow: 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.5);
+    z-index: 20000;
+    display: flex;
+    flex-direction: column;
+    font-family: 'VT323', monospace;
+    color: var(--dos-black);
+}
+
+.linkedin-header {
+    background-color: var(--dos-blue);
+    color: var(--dos-white);
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.linkedin-title {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.linkedin-close-btn {
+    background: none;
+    border: none;
+    color: var(--dos-white);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.linkedin-close-btn:hover {
+    color: #ff6666;
+}
+
+.linkedin-content {
+    padding: 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    background-color: #c0c0c0;
+}
+
+.linkedin-avatar {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--dos-blue);
+    color: var(--dos-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 0.125rem solid var(--dos-black);
+}
+
+.linkedin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+}
+
+.linkedin-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--dos-black);
+}
+
+.linkedin-headline {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.linkedin-location {
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.linkedin-footer {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    border-top: 0.0625rem solid #999;
+    background-color: #c0c0c0;
+}
+
+.linkedin-connect-btn {
+    background-color: var(--dos-blue);
+    color: var(--dos-white);
+    border: 0.125rem solid var(--dos-white);
+    border-right-color: var(--dos-black);
+    border-bottom-color: var(--dos-black);
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: 'VT323', monospace;
+    font-size: 1rem;
+}
+
+.linkedin-connect-btn:hover {
+    background-color: #0000cc;
+}
+
+.linkedin-connect-btn:active {
+    border-top-color: var(--dos-black);
+    border-left-color: var(--dos-black);
+    border-right-color: var(--dos-white);
+    border-bottom-color: var(--dos-white);
+    transform: translate(0.0625rem, 0.0625rem);
+}
