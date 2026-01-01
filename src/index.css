@@ -1240,9 +1240,9 @@ input.cmd-input {
 /* LinkedIn Widget Styles */
 .linkedin-widget {
     position: fixed;
-    bottom: 3.125rem;
-    left: 1.25rem;
-    width: 16rem;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 20rem;
     background-color: var(--dos-gray);
     border: 0.125rem solid var(--dos-white);
     border-right-color: var(--dos-black);
@@ -1294,16 +1294,12 @@ input.cmd-input {
 }
 
 .linkedin-avatar {
-    width: 3rem;
-    height: 3rem;
-    background-color: var(--dos-blue);
-    color: var(--dos-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: bold;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
     border: 0.125rem solid var(--dos-black);
+    filter: grayscale(100%) contrast(1.2) brightness(1.1);
+    image-rendering: pixelated;
 }
 
 .linkedin-info {
@@ -1313,18 +1309,18 @@ input.cmd-input {
 }
 
 .linkedin-name {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: bold;
     color: var(--dos-black);
 }
 
 .linkedin-headline {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #333;
 }
 
 .linkedin-location {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #555;
 }
 

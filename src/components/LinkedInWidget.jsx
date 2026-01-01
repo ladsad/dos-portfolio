@@ -23,9 +23,11 @@ const LinkedInWidget = ({ onClose }) => {
                 </button>
             </div>
             <div className="linkedin-content">
-                <div className="linkedin-avatar">
-                    [SK]
-                </div>
+                <img
+                    src="https://media.licdn.com/dms/image/v2/D5603AQHcIlOPGBJt1Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701709009418?e=2147483647&v=beta&t=hBUcWsVjlCRDJ4XRt6f3cCz3aLAfHQGPOhcK0vZG7Y8"
+                    alt="Shaurya Kumar"
+                    className="linkedin-avatar"
+                />
                 <div className="linkedin-info">
                     <div className="linkedin-name">Shaurya Kumar</div>
                     <div className="linkedin-headline">CS Student (AI/ML) @ VIT Chennai</div>
