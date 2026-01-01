@@ -24,7 +24,7 @@ const LinkedInWidget = ({ onClose }) => {
             </div>
             <div className="linkedin-content">
                 <img
-                    src="https://media.licdn.com/dms/image/v2/D5603AQHcIlOPGBJt1Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1701709009418?e=2147483647&v=beta&t=hBUcWsVjlCRDJ4XRt6f3cCz3aLAfHQGPOhcK0vZG7Y8"
+                    src="https://media.licdn.com/dms/image/v2/D5603AQGF3JNkEpOndg/profile-displayphoto-scale_200_200/B56Zt4IisNGsAY-/0/1767247067897?e=1769040000&v=beta&t=baVK1Is0upRiHH18cTKVm9B5lZ8PrY8A8B7WsT4kBKY"
                     alt="Shaurya Kumar"
                     className="linkedin-avatar"
                 />
