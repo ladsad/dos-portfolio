@@ -119,13 +119,12 @@ body {
     min-height: 12.5rem;
     max-height: 80vh;
     max-width: 90vw;
-    animation: windowOpen 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    transform-origin: center center;
+    animation: windowFadeIn 0.2s ease-out;
 }
 
-@keyframes windowOpen {
-    0% { transform: scale(0.95); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes windowFadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .window-frame.active {
