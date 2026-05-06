@@ -1398,3 +1398,205 @@ input.cmd-input {
     border-bottom-color: var(--dos-white);
     transform: translate(0.0625rem, 0.0625rem);
 }
+
+/* ============================================================
+   MODERN GLASSMORPHIC THEME
+   Activated when [data-theme="modern"] is set on .dos-container
+   ============================================================ */
+
+[data-theme="modern"] {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e) !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    text-shadow: none !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="modern"] .dos-header {
+    display: none;
+}
+
+[data-theme="modern"] .scanlines {
+    display: none;
+}
+
+[data-theme="modern"] .crt-flicker {
+    display: none;
+}
+
+[data-theme="modern"] .window-frame-outer {
+    /* no changes needed, outer wrapper is transparent */
+}
+
+[data-theme="modern"] .window-frame {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    animation: modernWindowOpen 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both !important;
+    color: #e2e8f0 !important;
+    overflow: hidden;
+}
+
+@keyframes modernWindowOpen {
+    0%   { opacity: 0; transform: scale(0.85) translateY(10px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+[data-theme="modern"] .window-frame.active {
+    border-color: rgba(129, 140, 248, 0.5) !important;
+    box-shadow:
+        0 12px 48px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(129, 140, 248, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+[data-theme="modern"] .window-header {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #e2e8f0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    cursor: move;
+    border-radius: 12px 12px 0 0;
+}
+
+[data-theme="modern"] .window-frame.active .window-header {
+    background: linear-gradient(90deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.2)) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="modern"] .window-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: none !important;
+}
+
+[data-theme="modern"] .control-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50% !important;
+    color: #e2e8f0 !important;
+    width: 1rem !important;
+    height: 1rem !important;
+    transition: background 0.2s ease;
+}
+
+[data-theme="modern"] .control-btn:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+}
+
+[data-theme="modern"] .close-btn:hover {
+    background: rgba(239, 68, 68, 0.5) !important;
+}
+
+[data-theme="modern"] .terminal-body {
+    background: rgba(0, 0, 0, 0.3) !important;
+    font-family: 'Fira Code', 'Courier New', monospace !important;
+    color: #a5f3fc !important;
+}
+
+[data-theme="modern"] .output-line {
+    color: #cbd5e1 !important;
+    animation: modernFadeIn 0.2s ease-out forwards !important;
+}
+
+@keyframes modernFadeIn {
+    0%   { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+[data-theme="modern"] .highlight {
+    color: #a78bfa !important;
+    text-shadow: 0 0 8px rgba(167, 139, 250, 0.6) !important;
+}
+
+[data-theme="modern"] .prompt {
+    color: #6ee7b7 !important;
+    text-shadow: 0 0 6px rgba(110, 231, 183, 0.5) !important;
+}
+
+[data-theme="modern"] input.cmd-input {
+    color: #f8fafc !important;
+    font-family: 'Fira Code', 'Courier New', monospace !important;
+}
+
+[data-theme="modern"] .taskbar {
+    background: rgba(10, 10, 20, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="modern"] .start-button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4) !important;
+}
+
+[data-theme="modern"] .taskbar-item {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 6px !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="modern"] .taskbar-item.active {
+    background: rgba(99, 102, 241, 0.25) !important;
+    border-color: rgba(99, 102, 241, 0.5) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="modern"] .clock {
+    background: transparent !important;
+    border: none !important;
+    color: #94a3b8 !important;
+}
+
+[data-theme="modern"] .start-menu {
+    background: rgba(15, 12, 41, 0.85) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="modern"] .start-menu-sidebar {
+    background: linear-gradient(to bottom, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2)) !important;
+    border-radius: 12px 0 0 12px;
+}
+
+[data-theme="modern"] .start-menu-item {
+    color: #e2e8f0 !important;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+[data-theme="modern"] .start-menu-item:hover {
+    background: rgba(99, 102, 241, 0.2) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="modern"] .submenu {
+    background: rgba(15, 12, 41, 0.9) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 8px !important;
+}
+
+[data-theme="modern"] .submenu-item {
+    color: #e2e8f0 !important;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+[data-theme="modern"] .submenu-item:hover {
+    background: rgba(99, 102, 241, 0.2) !important;
+    color: #ffffff !important;
+}

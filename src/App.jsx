@@ -8,6 +8,7 @@ import './index.css';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showBios, setShowBios] = useState(false);
+  const [theme] = useState(() => localStorage.getItem('displayMode') || 'retro');
 
   const handleEnterBios = () => {
     setShowBios(true);
@@ -16,7 +17,7 @@ function App() {
 
   const handleExitBios = () => {
     setShowBios(false);
-    setIsLoading(true); // Restart boot sequence or just go to OS? Let's restart boot for realism
+    setIsLoading(true);
   };
 
   if (showBios) {
@@ -31,7 +32,7 @@ function App() {
           onEnterBios={handleEnterBios}
         />
       ) : (
-        <Layout>
+        <Layout theme={theme}>
           <WindowManager />
         </Layout>
       )}
