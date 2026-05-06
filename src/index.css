@@ -2,11 +2,12 @@
 
 :root {
     --dos-blue: #0000AA;
-    --dos-gray: #AAAAAA;
+    --dos-gray: #C0C0C0;
     --dos-white: #FFFFFF;
     --dos-black: #000000;
-    --dos-cyan: #00AAAA;
+    --dos-cyan: #00FFFF;
     --crt-scanline: rgba(18, 16, 16, 0.1);
+    --glow-cyan: rgba(0, 255, 255, 0.6);
 }
 
 body {
@@ -19,6 +20,7 @@ body {
     height: 100vh;
     width: 100vw;
     font-size: 1.2rem;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 * {
@@ -55,6 +57,7 @@ body {
     background-size: 100% 0.25rem;
     pointer-events: none;
     z-index: 9999;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
 }
 
 .crt-flicker {
@@ -106,24 +109,37 @@ body {
 /* Window Styles */
 .window-frame {
     background-color: var(--dos-blue);
-    border: 0.125rem solid var(--dos-gray);
-    box-shadow: 0.625rem 0.625rem 0rem var(--dos-black);
+    border: 2px solid var(--dos-white);
+    border-right-color: var(--dos-black);
+    border-bottom-color: var(--dos-black);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6), inset 1px 1px 0px rgba(255,255,255,0.5);
     display: flex;
     flex-direction: column;
     min-width: 18.75rem;
     min-height: 12.5rem;
     max-height: 80vh;
     max-width: 90vw;
+    animation: windowOpen 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform-origin: center center;
+}
+
+@keyframes windowOpen {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .window-frame.active {
-    border-color: var(--dos-white);
     z-index: 1000;
 }
 
+.window-frame.active .window-header {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: var(--dos-white);
+}
+
 .window-header {
-    background-color: var(--dos-gray);
-    color: var(--dos-blue);
+    background: var(--dos-gray);
+    color: var(--dos-black);
     padding: 0.25rem 0.5rem;
     display: flex;
     justify-content: space-between;
@@ -198,11 +214,18 @@ input.cmd-input {
 .output-line {
     margin-bottom: 0.3125rem;
     white-space: pre-wrap;
+    animation: fadeInLine 0.1s ease-in forwards;
+}
+
+@keyframes fadeInLine {
+    0% { opacity: 0; transform: translateY(2px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .highlight {
-    color: var(--dos-white);
+    color: var(--dos-cyan);
     font-weight: bold;
+    text-shadow: 0 0 5px var(--glow-cyan);
 }
 
 /* Project Detail Styles */
@@ -416,6 +439,20 @@ input.cmd-input {
 .cursor-blink {
     display: inline-block;
     animation: blink 1s step-end infinite;
+}
+
+.crt-flash {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--dos-white);
+    z-index: 10001;
+    animation: flashOut 0.4s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes flashOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; display: none; }
 }
 
 /* Alt+Tab Switcher Styles */

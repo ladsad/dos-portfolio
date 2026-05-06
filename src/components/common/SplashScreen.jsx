@@ -61,6 +61,7 @@ const SplashScreen = ({ onComplete, onEnterBios }) => {
 
     return (
         <div className="splash-screen" onClick={onComplete}>
+            <div className="crt-flash"></div>
             <div className="bios-text">
                 <div>Award Modular BIOS v4.51PG, An Energy Star Ally</div>
                 <div>Copyright (C) 1984-90, Award Software, Inc.</div>
