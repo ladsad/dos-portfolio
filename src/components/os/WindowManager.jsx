@@ -71,7 +71,8 @@ const WindowManager = () => {
             title: 'COMMAND PROMPT',
             zIndex: 1,
             minimized: false,
-            initialPosition: { x, y }
+            initialPosition: { x, y },
+            initialSize: { width: 600, height: 400 }
         }];
     });
 
@@ -228,7 +229,8 @@ const WindowManager = () => {
                     title: 'COMMAND PROMPT',
                     zIndex: nextZIndex,
                     minimized: false,
-                    initialPosition: isMobile ? { x: 0, y: 0 } : { x: 50, y: 50 }
+                    initialPosition: isMobile ? { x: 0, y: 0 } : { x: 50, y: 50 },
+                    initialSize: { width: 600, height: 400 }
                 }]);
                 setNextZIndex(prev => prev + 1);
                 setActiveWindowId('terminal');
