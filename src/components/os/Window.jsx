@@ -91,42 +91,44 @@ const Window = ({
         >
             <div
                 ref={nodeRef}
-                className={`window-frame ${isActive ? 'active' : ''} ${className}`}
+                className={`window-frame-outer ${isActive ? 'active' : ''} ${className}`}
                 style={{
                     zIndex,
                     position: 'absolute',
                     width: isMobile ? '100%' : size.width,
                     height: isMobile ? 'calc(100% - 40px)' : size.height,
-                    maxHeight: isMobile ? 'none' : (size.height === 'auto' ? '80vh' : 'none') // Use 80vh for auto, none for manual
+                    maxHeight: isMobile ? 'none' : (size.height === 'auto' ? '80vh' : 'none')
                 }}
                 onClick={onFocus}
             >
-                <div className="window-header">
-                    <span className="window-title">{title}</span>
-                    <div className="window-controls">
-                        <button onClick={(e) => { e.stopPropagation(); onMinimize(id); }} className="control-btn">
-                            <Minus size={14} />
-                        </button>
-                        <button className="control-btn" disabled>
-                            <Square size={12} />
-                        </button>
-                        <button onClick={(e) => { e.stopPropagation(); onClose(id); }} className="control-btn close-btn">
-                            <X size={14} />
-                        </button>
+                <div className={`window-frame ${isActive ? 'active' : ''}`} style={{ width: '100%', height: '100%' }}>
+                    <div className="window-header">
+                        <span className="window-title">{title}</span>
+                        <div className="window-controls">
+                            <button onClick={(e) => { e.stopPropagation(); onMinimize(id); }} className="control-btn">
+                                <Minus size={14} />
+                            </button>
+                            <button className="control-btn" disabled>
+                                <Square size={12} />
+                            </button>
+                            <button onClick={(e) => { e.stopPropagation(); onClose(id); }} className="control-btn close-btn">
+                                <X size={14} />
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div className="window-content">
-                    {children}
-                </div>
+                    <div className="window-content">
+                        {children}
+                    </div>
 
-                {/* Resize Handles */}
-                {!isMobile && (
-                    <>
-                        <div className="resize-handle resize-handle-r" onMouseDown={(e) => handleResizeStart(e, 'r')} />
-                        <div className="resize-handle resize-handle-b" onMouseDown={(e) => handleResizeStart(e, 'b')} />
-                        <div className="resize-handle resize-handle-br" onMouseDown={(e) => handleResizeStart(e, 'br')} />
-                    </>
-                )}
+                    {/* Resize Handles */}
+                    {!isMobile && (
+                        <>
+                            <div className="resize-handle resize-handle-r" onMouseDown={(e) => handleResizeStart(e, 'r')} />
+                            <div className="resize-handle resize-handle-b" onMouseDown={(e) => handleResizeStart(e, 'b')} />
+                            <div className="resize-handle resize-handle-br" onMouseDown={(e) => handleResizeStart(e, 'br')} />
+                        </>
+                    )}
+                </div>
             </div>
         </Draggable>
     );
