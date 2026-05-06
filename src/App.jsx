@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Layout from './components/Layout';
-import WindowManager from './components/WindowManager';
-import SplashScreen from './components/SplashScreen';
-import BiosSetup from './components/BiosSetup';
+import Layout from './components/common/Layout';
+import WindowManager from './components/os/WindowManager';
+import SplashScreen from './components/common/SplashScreen';
+import BiosSetup from './components/apps/BiosSetup';
 import './index.css';
 
 function App() {

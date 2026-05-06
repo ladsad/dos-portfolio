@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { portfolioData } from '../data/portfolio';
+import { portfolioData } from '../../data/portfolio';
 
 const Terminal = ({ onOpenProject }) => {
     const [input, setInput] = useState('');

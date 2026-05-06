@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Window from './Window';
-import Terminal from './Terminal';
-import ProjectDetail from './ProjectDetail';
-import ResumeViewer from './ResumeViewer';
+import Terminal from '../apps/Terminal';
+import ProjectDetail from '../apps/ProjectDetail';
+import ResumeViewer from '../apps/ResumeViewer';
 import StartMenu from './StartMenu';
 import Taskbar from './Taskbar';
 import AltTabSwitcher from './AltTabSwitcher';
-import { portfolioData } from '../data/portfolio';
-import TipWidget from './TipWidget';
-import LinkedInWidget from './LinkedInWidget';
+import { portfolioData } from '../../data/portfolio';
+import TipWidget from '../common/TipWidget';
+import LinkedInWidget from '../apps/LinkedInWidget';
 
 const tips = [
     "Press Shift+Tab to switch between windows quickly!",

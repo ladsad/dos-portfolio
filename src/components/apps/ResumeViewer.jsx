@@ -1,5 +1,5 @@
 import React from 'react';
-import { portfolioData } from '../data/portfolio';
+import { portfolioData } from '../../data/portfolio';
 
 const ResumeViewer = () => {
     const { resumeData } = portfolioData;
