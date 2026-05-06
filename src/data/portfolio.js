@@ -12,19 +12,28 @@ export const portfolioData = {
       degree: "B.Tech. Computer Science (AI & ML)",
       period: "Sept 2022 – July 2026",
       details: [
-        "CGPA: 8.94/10.0",
+        "CGPA: 8.89/10.0",
         "Coursework: Statistics, Data Structures, Machine/Deep Learning, Database Systems, Software Engineering"
       ]
     }
   ],
   experience: [
     {
+      role: "Data Engineer & Software Engineer Intern (AI Systems)",
+      company: "Data Mavericks",
+      period: "Feb 2026 – May 2026",
+      highlights: [
+        "Re-architected an LLM-powered NL-to-SQL backend using FastAPI and AWS Bedrock, reducing cold-start latency by ~40%.",
+        "Built scalable Python ETL pipelines and analyzed warehouse data, improving query performance by 50%."
+      ]
+    },
+    {
       role: "Computer Vision & Data Engineering Intern",
       company: "Bidaal",
       period: "June 2025 – July 2025",
       highlights: [
-        "Developed scalable data pipelines and ML inference systems using DeepStream and Python, reducing algorithmic latency by 25% and broadening deployment scalability by 40%",
-        "Conducted exploratory data analysis, feature engineering and model diagnostics for large-scale computer vision datasets"
+        "Deployed YOLO-based safety detection pipelines on edge devices; extracted insights that reduced manual safety inspections by 60%.",
+        "Optimized inference latency (25% reduction) and edge scalability (40% improvement) through model quantization and distributed processing."
       ]
     },
     {
@@ -32,8 +41,8 @@ export const portfolioData = {
       company: "eMudhra",
       period: "June 2024 – July 2024",
       highlights: [
-        "Designed and built robust backend data services using Java Server Pages and Apache Tomcat, leveraging RESTful microservices. Implemented Java Servlets for optimized data processing, achieving 10–100× performance boost for analytics workloads",
-        "Utilized advanced MySQL clustering for high-speed, reliable data retrieval in real-time scenarios"
+        "Engineered robust backend data services using Java Servlets, Apache Tomcat, and MySQL clustering: 10–100× performance improvement for analytics workloads.",
+        "Optimized schema design reducing query latency by 30% and enabling real-time analytics at scale."
       ]
     }
   ],
@@ -44,8 +53,8 @@ export const portfolioData = {
       category: "Causal ML & Production AI",
       highlights: [
         "Beyond simple churn prediction: Identifies *who* to target using Heterogeneous Treatment Effects (HTE)",
-        "Implements Doubly Robust Estimation and Causal Forests (EconML) for unbiased causal inference",
-        "Deployable FastAPI service for real-time intervention scoring and A/B test simulation"
+        "Implements Doubly Robust Estimation and Causal Forests for unbiased causal inference",
+        "Productionized FastAPI endpoint with real-time recommendations, driving a 24% relative churn reduction in A/B tests."
       ],
       content: `# Churn Prediction with Heterogeneous Treatment Effects
 
@@ -77,8 +86,8 @@ Most churn systems just predict "who churns". This project uses **Causal Forests
       link: "https://github.com/ladsad/codewhisper",
       category: "Developer Tools & AI",
       highlights: [
-        "Intelligent tool for auto-generating documentation and analyzing code quality using CodeT5+",
-        "Features a VS Code extension for real-time docstring generation and a FastAPI backend with a Streamlit dashboard",
+        "Full-stack Agentic AI coding assistant integrating a fine-tuned CodeT5+ LLM with a highly responsive web interface and FastAPI backend",
+        "Deployed the service via CI/CD pipelines on AWS, improving developer productivity and documentation acceptance by +12%",
         "Fine-tuned CodeT5-small on CodeXGLUE (Python/Java) using QLoRA for efficient model training"
       ],
       content: `# CodeWhisper
@@ -220,7 +229,8 @@ which provides a very good implementation to start with.
       category: "NLP Architectures",
       highlights: [
         "Improved sequence modeling by integrating attention mechanisms into RHNs, tested on Penn TreeBank data",
-        "Designed global auxiliary memory for effective retention of contextual info—boosting NLP model performance"
+        "Designed global auxiliary memory for effective retention of contextual info—boosting NLP model performance",
+        "Working Paper: Integrating Attention mechanisms into Recurrent Highway Networks with Grouped Auxiliary Memory"
       ],
       content: `# Attention Mechanism on GAM-RHN
 
@@ -442,8 +452,8 @@ A full-stack application that performs real-time sentiment analysis on Reddit co
       category: "Vision & GAN Systems",
       highlights: [
         "Engineered hybrid U-Net plus ResNet GAN architectures for restoring art images (WikiArt dataset)",
-        "Leveraged classical vision and deep learning to enhance feature separation, texture, and structure",
-        "Achieved high-fidelity results via adversarial, content, and style loss optimization"
+        "Achieved high-fidelity results via adversarial, content, and style loss optimization",
+        "Working Paper: ArtResGAN: A GAN-Based Approach for Image Restoration and Style Preservation"
       ],
       content: `# ArtResGAN
 
@@ -698,15 +708,16 @@ Based on the project report "MUSE GAN: A MULTIVIEW MODIFIED GAN ARCHITECTURE FOR
     }
   ],
   skills: {
-    programming: "Python, Java, SQL, C++, JavaScript",
-    ml_data: "TensorFlow, PyTorch, Scikit-Learn, NumPy, Pandas, DeepStream",
-    databases: "MySQL, PostgreSQL, MongoDB",
-    cloud_infra: "AWS, S3, Lambda, API Gateway, Docker, Maven, Git",
-    full_stack: "React, Node.js, Express.js, RESTful APIs"
+    programming: "Python, Java, SQL, JavaScript, TypeScript, C++",
+    ml_data: "PyTorch, TensorFlow, Scikit-Learn, Pandas, NumPy, HuggingFace",
+    databases: "MySQL, PostgreSQL, Snowflake, MongoDB",
+    cloud_infra: "AWS (Lambda, S3, API Gateway, EC2), Docker, MLflow, Git, CI/CD",
+    full_stack: "React, FastAPI, Node.js, RESTful APIs",
+    ai_integration: "AWS Bedrock, LLM APIs (OpenAI, Claude), Agent Orchestration"
   },
   awards: [
-    "Member, Microsoft Innovations Club (2023–2025); Google Developer Student Club (2022–2023); Secretary, Bits N Bytes Club (2021–2022)",
-    "Awards: 2nd Place Blitz(K)rieg Game Design (2019), Best Documentary – INTACH FilmIt (2018), 1st Place – Design Championship (2017)"
+    "Certifications: SnowPro Core (Snowflake, 2026), SPN Gen AI Foundation",
+    "Awards: Top 500 Amazon ML Challenge (2025), 1st Place NASSCOM Design Championships (2018), 2nd Place Blitz(K)rieg Game Design (2019)"
   ],
   resumeData: {
     header: {
@@ -723,20 +734,20 @@ Based on the project report "MUSE GAN: A MULTIVIEW MODIFIED GAN ARCHITECTURE FOR
         degree: "B.Tech. Computer Science (AI & ML)",
         dates: "Sept 2022 – July 2026",
         details: [
-          "CGPA: 8.94/10.0",
-          "Coursework: Data Structures, Database Systems, Java Programming, Software Engineering, Statistical Methods"
+          "CGPA: 8.89/10.0",
+          "Coursework: Data Structures, Database Systems, Java Programming, Software Engineering, Machine Learning"
         ]
       }
     ],
     experience: [
       {
-        role: "Software Engineer Intern",
-        company: "eMudhra",
-        dates: "June 2024 – July 2024",
+        role: "Data Engineer & Software Engineer Intern",
+        company: "Data Mavericks",
+        dates: "Feb 2026 – May 2026",
         points: [
-          "Designed and developed robust backend services using Java Server Pages and Apache Tomcat framework, implementing RESTful microservices for scalable enterprise applications",
-          "Implemented Java Servlets to optimize application performance, achieving 10–100× improvement in data processing efficiency",
-          "Utilized MySQL Clusters for rapid, reliable data retrieval, increasing access speeds by 3–5x."
+          "Re-architected an Agentic AI-driven NL-to-SQL backend for enterprise data workflows, integrating a React frontend with a scalable FastAPI backend on AWS.",
+          "Integrated LLM capabilities via AWS Bedrock to build an intelligent copilot, reducing cold-start latency by ~40% for business stakeholders.",
+          "Built scalable Python ETL pipelines and analyzed warehouse data, improving query performance by 50%."
         ]
       },
       {
@@ -744,8 +755,17 @@ Based on the project report "MUSE GAN: A MULTIVIEW MODIFIED GAN ARCHITECTURE FOR
         company: "Bidaal",
         dates: "June 2025 – July 2025",
         points: [
-          "Developed scalable data processing pipelines using DeepStream and Python, achieving 25% latency reduction and 40% deployment capability expansion",
-          "Collaborated with cross-functional teams to deliver end-to-end analytical solutions and communicated technical insights to stakeholders"
+          "Deployed YOLO-based safety detection pipelines on edge devices, extracting insights that reduced manual safety inspections by 60%.",
+          "Optimized inference latency (25% reduction) and edge scalability (40% improvement) through model quantization and distributed processing."
+        ]
+      },
+      {
+        role: "Software Engineer Intern",
+        company: "eMudhra",
+        dates: "June 2024 – July 2024",
+        points: [
+          "Engineered robust backend services using Java Servlets, Apache Tomcat, and MySQL clustering, building a solid foundation that elevated analytics throughput by 10–100×.",
+          "Restructured relational database schemas and optimized SQL query plans, decreasing average query latency by 30%."
         ]
       }
     ],
@@ -821,16 +841,16 @@ Based on the project report "MUSE GAN: A MULTIVIEW MODIFIED GAN ARCHITECTURE FOR
       }
     ],
     technicalSkills: {
-      programming: "Java, Python, SQL, C++, JavaScript",
-      backend: "Express.js, RESTful APIs, Django",
-      databases: "MySQL, PostgreSQL, MongoDB",
-      toolsCloud: "AWS, Git, Maven, Docker",
-      frontend: "React, Node.js",
-      mlAi: "TensorFlow, PyTorch, Scikit-Learn, NumPy, Pandas"
+      programming: "Python, Java, SQL, JavaScript, TypeScript, C++",
+      backend: "FastAPI, Node.js, RESTful APIs",
+      databases: "MySQL, PostgreSQL, Snowflake, MongoDB",
+      toolsCloud: "AWS (Lambda, S3, API Gateway, EC2), Docker, MLflow, Git",
+      frontend: "React, HTML, CSS",
+      mlAi: "PyTorch, TensorFlow, Scikit-Learn, Pandas, AWS Bedrock"
     },
     awards: [
-      "Member, Microsoft Innovations Club (2023–2025); Member, Google Developer Student Club (2022–2023); Secretary, Bits N Bytes Club (2021–2022)",
-      "Awards: 2nd Place – Blitz(K)rieg Game Design (2019), Best Documentary – INTACH FilmIt (2018), 1st Place – Design Championship (2017)"
+      "Certifications: SnowPro Core (Snowflake, 2026), SPN Gen AI Foundation",
+      "Awards: Top 500, Amazon ML Challenge (2025), First Place, NASSCOM Design Championships (2018)"
     ]
   }
 };
