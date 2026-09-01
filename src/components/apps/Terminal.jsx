@@ -1,6 +1,110 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { portfolioData } from '../../data/portfolio';
 
+const PROJECT_ALIASES = {
+    // New projects
+    'riskshield': 'RiskShield',
+    'risk-shield': 'RiskShield',
+    'risk shield': 'RiskShield',
+    'risk_shield': 'RiskShield',
+    'risk': 'RiskShield',
+    'kestrel': 'Kestrel',
+    'confoundr': 'Confoundr',
+    'confounder': 'Confoundr',
+    'pitwall': 'Pitwall: F1 Race Prediction Platform',
+    'f1': 'Pitwall: F1 Race Prediction Platform',
+    'f1-pyspark-analytics': 'Pitwall: F1 Race Prediction Platform',
+    'f1 pyspark analytics': 'Pitwall: F1 Race Prediction Platform',
+    'f1-pyspark': 'Pitwall: F1 Race Prediction Platform',
+    'pitwall: f1 race prediction platform': 'Pitwall: F1 Race Prediction Platform',
+    'pitwall f1': 'Pitwall: F1 Race Prediction Platform',
+    'race prediction': 'Pitwall: F1 Race Prediction Platform',
+    'finflow': 'FinFlow',
+    'fin-flow': 'FinFlow',
+    'fin flow': 'FinFlow',
+    'fin_flow': 'FinFlow',
+    'orchestrate': 'HackerRank Orchestrate: Message Notification Router',
+    'hackerrank': 'HackerRank Orchestrate: Message Notification Router',
+    'hackerrank-orchestrate': 'HackerRank Orchestrate: Message Notification Router',
+    'hackerrank orchestrate': 'HackerRank Orchestrate: Message Notification Router',
+    'hackerrank-orchestra': 'HackerRank Orchestrate: Message Notification Router',
+    'hackerrank orchestrate: message notification router': 'HackerRank Orchestrate: Message Notification Router',
+    'message notification router': 'HackerRank Orchestrate: Message Notification Router',
+
+    // Existing projects
+    'churn': 'Churn HTE: Causal ML',
+    'churn-hte': 'Churn HTE: Causal ML',
+    'churn hte': 'Churn HTE: Causal ML',
+    'churn hte: causal ml': 'Churn HTE: Causal ML',
+    'causal ml': 'Churn HTE: Causal ML',
+    'causal-ml': 'Churn HTE: Causal ML',
+    'causal': 'Churn HTE: Causal ML',
+    'codewhisper': 'CodeWhisper',
+    'code-whisper': 'CodeWhisper',
+    'code whisper': 'CodeWhisper',
+    'microsegnet': 'MicroSegNet Optimizer',
+    'microsegnet-optimizer': 'MicroSegNet Optimizer',
+    'microsegnet optimizer': 'MicroSegNet Optimizer',
+    'microseg': 'MicroSegNet Optimizer',
+    'rhn': 'Attention-Enhanced RHN',
+    'attention-enhanced-rhn': 'Attention-Enhanced RHN',
+    'attention enhanced rhn': 'Attention-Enhanced RHN',
+    'attention': 'Attention-Enhanced RHN',
+    'mustard': 'Mustard Archives',
+    'mustard-archives': 'Mustard Archives',
+    'mustard archives': 'Mustard Archives',
+    'sentiment': 'AWS Sentiment Analysis',
+    'aws-sentiment': 'AWS Sentiment Analysis',
+    'aws-sentiment-analysis': 'AWS Sentiment Analysis',
+    'aws sentiment analysis': 'AWS Sentiment Analysis',
+    'aws': 'AWS Sentiment Analysis',
+    'artresgan': 'ArtResGAN',
+    'art-res-gan': 'ArtResGAN',
+    'art res gan': 'ArtResGAN',
+    'musegan': 'MUSE-GAN',
+    'muse-gan': 'MUSE-GAN',
+    'muse gan': 'MUSE-GAN',
+    'muse': 'MUSE-GAN',
+};
+
+const resolveProject = (query) => {
+    if (!query) return null;
+    const cleanQuery = query.trim().toLowerCase();
+    const strippedQuery = cleanQuery.replace(/[^a-z0-9]/g, '');
+
+    // 1. Direct alias match
+    if (PROJECT_ALIASES[cleanQuery]) {
+        const targetName = PROJECT_ALIASES[cleanQuery];
+        const proj = portfolioData.projects.find(p => p.name.toLowerCase() === targetName.toLowerCase());
+        if (proj) return proj;
+    }
+
+    // 2. Stripped alias match (ignores spaces, hyphens, colons, underscores)
+    for (const [aliasKey, targetName] of Object.entries(PROJECT_ALIASES)) {
+        if (aliasKey.replace(/[^a-z0-9]/g, '') === strippedQuery) {
+            const proj = portfolioData.projects.find(p => p.name.toLowerCase() === targetName.toLowerCase());
+            if (proj) return proj;
+        }
+    }
+
+    // 3. Exact project name match
+    const exactMatch = portfolioData.projects.find(p => p.name.toLowerCase() === cleanQuery);
+    if (exactMatch) return exactMatch;
+
+    // 4. Stripped project name match
+    const strippedMatch = portfolioData.projects.find(p => p.name.toLowerCase().replace(/[^a-z0-9]/g, '') === strippedQuery);
+    if (strippedMatch) return strippedMatch;
+
+    // 5. Substring / Partial match
+    const partialMatch = portfolioData.projects.find(p => {
+        const pClean = p.name.toLowerCase();
+        return pClean.includes(cleanQuery) || cleanQuery.includes(pClean);
+    });
+    if (partialMatch) return partialMatch;
+
+    return null;
+};
+
 const Terminal = ({ onOpenProject }) => {
     const [input, setInput] = useState('');
     const [history, setHistory] = useState([
@@ -85,34 +189,38 @@ ${exp.highlights.map(h => `  * ${h}`).join('\n')}
                 });
                 break;
 
-            case 'projects':
+            case 'projects': {
+                const maxNameLength = Math.max(...portfolioData.projects.map(p => p.name.length));
                 newHistory.push({
                     type: 'output',
                     content: `PROJECTS (Type "open <name>" to view details):
-----------------------------------------`
+--------------------------------------------------------------------------------`
                 });
                 portfolioData.projects.forEach(proj => {
                     newHistory.push({
                         type: 'output',
-                        content: `* ${proj.name.padEnd(25)} [${proj.category}]`
+                        content: `* ${proj.name.padEnd(maxNameLength + 2)} [${proj.category}]`
                     });
                 });
-                newHistory.push({ type: 'output', content: '----------------------------------------' });
+                newHistory.push({ type: 'output', content: '--------------------------------------------------------------------------------' });
                 break;
+            }
 
             case 'open': {
-                const projectName = args.slice(1).join(' ');
+                const projectName = args.slice(1).join(' ').trim();
                 if (!projectName) {
                     newHistory.push({
                         type: 'output',
                         content: 'Usage: open <project name>'
                     });
                 } else {
-                    const success = onOpenProject(projectName);
+                    const matchedProject = resolveProject(projectName);
+                    const targetName = matchedProject ? matchedProject.name : projectName;
+                    const success = onOpenProject(targetName);
                     if (success) {
                         newHistory.push({
                             type: 'output',
-                            content: `Opening project "${projectName}"...`
+                            content: `Opening project "${targetName}"...`
                         });
                     } else {
                         newHistory.push({
@@ -135,6 +243,7 @@ ML/DATA:       ${portfolioData.skills.ml_data}
 DATABASES:     ${portfolioData.skills.databases}
 CLOUD/INFRA:   ${portfolioData.skills.cloud_infra}
 FULL STACK:    ${portfolioData.skills.full_stack}
+AI / AGENTIC:  ${portfolioData.skills.ai_integration}
 ----------------------------------------`
                 });
                 break;

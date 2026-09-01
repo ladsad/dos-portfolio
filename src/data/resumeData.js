@@ -3,48 +3,49 @@ export const resumeData = {
     "name": "Shaurya Kumar",
     "location": "New Delhi, India",
     "email": "emailofshauryak@gmail.com",
-    "phone": "+91 99711 53775",
-    "linkedin": "https://www.linkedin.com/in/shaurya-kumar-22262b236/",
+    "phone": "+91 9971153775",
+    "linkedin": "https://www.linkedin.com/in/shaurya-kumar-22262b236",
     "github": "https://github.com/ladsad"
   },
   "education": [
     {
       "institution": "Vellore Institute of Technology (VIT), Chennai",
-      "degree": "B.Tech. Computer Science (AI & ML)",
+      "degree": "B.Tech. Computer Science (Artificial Intelligence & Machine Learning)",
       "dates": "Sept 2022 – July 2026",
       "details": [
-        "CGPA: 8.89/10.0",
-        "Coursework: Data Structures, Database Systems, Java Programming, Software Engineering, Machine Learning"
+        "CGPA: 8.93 / 10.0",
+        "Coursework: Statistics, Machine/Deep Learning, NLP, Database Systems, Software Engineering, Web Development"
       ]
     }
   ],
   "experience": [
     {
-      "role": "Data Engineer & Software Engineer Intern",
+      "role": "Data Engineer Intern",
       "company": "Data Mavericks",
       "dates": "Feb 2026 – May 2026",
       "points": [
-        "Re-architected an Agentic AI-driven NL-to-SQL backend for enterprise data workflows, integrating a React frontend with a scalable FastAPI backend on AWS.",
-        "Integrated LLM capabilities via AWS Bedrock to build an intelligent copilot, reducing cold-start latency by ~40% for business stakeholders.",
-        "Built scalable Python ETL pipelines and analyzed warehouse data, improving query performance by 50%."
+        "Designed and implemented scalable ETL/ELT pipelines across heterogeneous OLTP sources using AWS Glue and Kinesis; integrated CDC streams, SCD Type 1/2 dimensional models, and schema validation into Snowflake, maintaining SLA adherence above 98% with full audit lineage.",
+        "Operated and optimized internal data warehouse environments through clustering key tuning, materialized view strategies, and query plan analysis — improving analytical query performance by up to 50% and reducing compute costs.",
+        "Re-architected an LLM-powered NL-to-SQL analytics accelerator (AWS Bedrock, Secrets Manager, Redis, Layered Lambda Architecture) serving enterprise Snowflake warehouses; slashed cold-start latency by ~40% and eliminated credential rotation incidents."
       ]
     },
     {
-      "role": "Computer Vision Engineering Intern",
+      "role": "Computer Vision & Data Engineering Intern",
       "company": "Bidaal",
       "dates": "June 2025 – July 2025",
       "points": [
-        "Deployed YOLO-based safety detection pipelines on edge devices, extracting insights that reduced manual safety inspections by 60%.",
-        "Optimized inference latency (25% reduction) and edge scalability (40% improvement) through model quantization and distributed processing."
+        "Deployed YOLO-based safety detection pipeline on construction site edge devices via NVIDIA DeepStream; monitored PPE compliance across multiple sites, reducing manual safety inspections by 60%.",
+        "Designed and operated event-driven streaming data pipelines for real-time ML inference workloads; implemented automated data quality validation frameworks, reducing bad-data incidents by ~80% and raising downstream model accuracy by 6pp.",
+        "Optimized edge inference latency (25% reduction) and edge scalability (40% improvement) through model quantization, batching, and distributed stream processing."
       ]
     },
     {
-      "role": "Software Engineer Intern",
+      "role": "Software Engineer Intern (Data Infrastructure)",
       "company": "eMudhra",
       "dates": "June 2024 – July 2024",
       "points": [
-        "Engineered robust backend services using Java Servlets, Apache Tomcat, and MySQL clustering, building a solid foundation that elevated analytics throughput by 10–100×.",
-        "Restructured relational database schemas and optimized SQL query plans, decreasing average query latency by 30%."
+        "Engineered batch ETL workflows and RESTful data services (Java Servlets, Apache Tomcat, MySQL clustering); elevated analytics throughput by 10–100× for enterprise reporting workloads.",
+        "Restructured relational warehouse schemas and rewrote SQL query execution plans, reducing average query latency by 30% and enabling real-time self-service analytics for 50+ cross-functional business stakeholders."
       ]
     }
   ],
@@ -70,13 +71,13 @@ export const resumeData = {
       ]
     },
     {
-      "name": "Mustard Archives: Scalable Web Analytics",
+      "name": "Mustard Archives: Distributed Analytics Data Platform",
       "link": "https://github.com/ladsad/Mustard-Archives",
-      "type": "Full-Stack Platform",
+      "type": "Big Data / Data Lake",
       "points": [
-        "Developed comprehensive full-stack web platform using React frontend and Express.js backend with RESTful API architecture",
-        "Implemented robust MySQL database design with optimized schemas and complex queries, reducing data redundancy by 30%.",
-        "Built a secure user authentication system using SHA256 encryption algorithm for improved security"
+        "Built a scalable data lake platform on Amazon S3 with a PySpark / SparkSQL processing layer",
+        "Migrated 100M+ session records from Pandas to Apache Spark using broadcast joins and Parquet partitioning, reducing query latency 2.1× and storage 4× (3.2 GB CSV → 0.8 GB Parquet)",
+        "Orchestrated end-to-end ETL pipelines with Apache Airflow including automated data quality checks and Kimball-style star schema data marts"
       ]
     },
     {
@@ -117,18 +118,78 @@ export const resumeData = {
         "Incorporated classical machine vision techniques to enhance texture and structural detail in restored images",
         "Achieved high fidelity restorations using adversarial, content and style loss functions"
       ]
+    },
+    {
+      "name": "RiskShield: Real-Time Fraud Detection Platform",
+      "link": "https://github.com/ladsad/RiskShield",
+      "type": "Stream Processing & ML Infrastructure",
+      "points": [
+        "Architected an event-driven fraud detection platform in Go and Python across four microservices processing streams end-to-end via Redpanda",
+        "Engineered dual-path ML scoring: primary Cloudflare Workers AI with local scikit-learn IsolationForest circuit breaker fallback (<5ms latency)",
+        "Built sliding-window velocity & Haversine geo-distance enrichment with Redis and configurable rules engine with PostgreSQL audit ledger"
+      ]
+    },
+    {
+      "name": "Kestrel: Distributed Key-Value Store",
+      "link": "https://github.com/ladsad/kestrel",
+      "type": "Distributed Systems & Storage Engines",
+      "points": [
+        "Built a distributed, fault-tolerant key-value store from scratch in Go, implementing a RESP2 TCP server compatible with redis-cli",
+        "Engineered strict AOF durability (always/everysec/no) and background snapshotting, replaying 367,000 writes in ~318ms with zero data loss",
+        "Implemented Raft consensus for leader election (~1.5s failover) and consistent hashing proxy for horizontal sharding"
+      ]
+    },
+    {
+      "name": "Confoundr: Causal Validity Linter & Diagnostic Platform",
+      "link": "https://github.com/ladsad/confoundr",
+      "type": "Causal Inference & ML Diagnostics",
+      "points": [
+        "Architected an open-source Python library for causal validity linting (target leakage, unmeasured confounding, positivity violations)",
+        "Engineered a scalable multi-tenant platform with FastAPI, Redis-backed job queue, and sandboxed Docker worker execution",
+        "Integrated an LLM-powered explainer layer (Groq / LLaMA 3.1) to translate statistical failures into plain-language triage and fixes"
+      ]
+    },
+    {
+      "name": "Pitwall: F1 Race Prediction Analytics Platform",
+      "link": "https://github.com/ladsad/pitwall",
+      "type": "Big Data Engineering & Deep Learning",
+      "points": [
+        "Architected Medallion data lakehouse (Bronze/Silver/Gold Parquet) using PySpark over 16GB telemetry dataset across 70+ seasons",
+        "Pre-trained 1D PatchTST-style Masked Autoencoder (MAE) in PyTorch achieving 0.996 top-3 accuracy over 199 epochs",
+        "Deployed Next.js dashboard on Vercel backed by Supabase PostgreSQL with client-side caching and dynamic occlusion sensitivity"
+      ]
+    },
+    {
+      "name": "FinFlow: Distributed Payment Processing System",
+      "link": "https://github.com/ladsad/FinFlow",
+      "type": "Distributed Systems & FinTech",
+      "points": [
+        "Architected high-throughput payment processing engine in Java 21 and Spring Boot 3.3 handling 10k+ concurrent transactions via Kafka KRaft",
+        "Built ledger validation and sliding-window rate limiting (max 5 tx/60s) with PostgreSQL persistence and idempotency controls",
+        "Implemented OpenTelemetry / Jaeger distributed tracing and ELK centralized logging, reducing MTTR for API failures by 40%"
+      ]
+    },
+    {
+      "name": "HackerRank Orchestrate: Message Notification Router",
+      "link": "https://github.com/ladsad/hackerrank-orchestra",
+      "type": "Agentic AI & Multimodal Systems",
+      "points": [
+        "Architected multimodal AI message routing pipeline in Python to classify WhatsApp streams into notify/digest/mute with 93.3% accuracy",
+        "Secured Top 200 finish globally using Cloudflare Workers AI (LLaMA 3.1 8B) with Tesseract OCR and FFmpeg transcription",
+        "Implemented XML prompt encapsulation and deterministic post-LLM regex scam backstops preventing prompt injection attacks"
+      ]
     }
   ],
   "technicalSkills": {
-    "programming": "Python, Java, SQL, JavaScript, TypeScript, C++",
-    "backend": "FastAPI, Node.js, RESTful APIs",
-    "databases": "MySQL, PostgreSQL, Snowflake, MongoDB",
-    "toolsCloud": "AWS (Lambda, S3, API Gateway, EC2), Docker, MLflow, Git",
-    "frontend": "React, HTML, CSS",
-    "mlAi": "PyTorch, TensorFlow, Scikit-Learn, Pandas, AWS Bedrock"
+    "programming": "Python, Java, Go, SQL, SparkSQL, JavaScript, TypeScript, C++, PL/SQL",
+    "backend": "FastAPI, Spring Boot, Java Servlets, Node.js, RESTful APIs, WebSockets",
+    "databases": "Snowflake (SnowPro Core), PostgreSQL, MySQL, Redis, Supabase, Pinecone",
+    "toolsCloud": "AWS (Glue, Kinesis, Bedrock, Secrets Manager, Lambda, S3, EC2, MSK), Terraform, Docker, Kubernetes, CI/CD, Prometheus, Grafana",
+    "frontend": "React, Next.js, HTML, CSS, Streamlit, Gradio",
+    "mlAi": "PyTorch, PySpark, TensorFlow, Scikit-Learn, LightGBM, HuggingFace Transformers, LangGraph, OpenAI API, RAG, QLoRA Fine-Tuning, YOLO, Causal Inference"
   },
   "awards": [
-    "Certifications: SnowPro Core (Snowflake, 2026), SPN Gen AI Foundation",
-    "Awards: Top 500, Amazon ML Challenge (2025), First Place, NASSCOM Design Championships (2018)"
+    "Certifications: SnowPro Core Certified (Snowflake, 2026), SPN Gen AI Foundation — Snowflake Partner Network",
+    "Awards: Top 200 — HackerRank Orchestrate (August 2026), Top 500 — Amazon ML Challenge (2025), First Place — NASSCOM Design Championships: Game Design (2018)"
   ]
 };

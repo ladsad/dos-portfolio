@@ -771,7 +771,12 @@ input.cmd-input {
     position: absolute;
     left: 100%;
     bottom: 0;
-    width: 12.5rem;
+    width: 14rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dos-gray) var(--dos-blue);
     background-color: var(--dos-gray);
     border: 0.125rem solid var(--dos-white);
     border-right-color: var(--dos-black);
@@ -788,6 +793,9 @@ input.cmd-input {
     padding: 0.375rem 0.625rem;
     cursor: pointer;
     color: var(--dos-black);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .submenu-item:hover {
@@ -889,22 +897,27 @@ input.cmd-input {
     color: #004f90;
 }
 
-.item-date {
+.item-date,
+.date,
+.type {
     font-style: italic;
     font-size: 0.9rem;
 }
 
-.item-subtitle {
+.item-subtitle,
+.item-subheader {
     font-style: italic;
     margin-bottom: 0.3125rem;
 }
 
-.resume-list {
+.resume-list,
+.item-details {
     margin: 0.3125rem 0;
     padding-left: 1.25rem;
 }
 
-.resume-list li {
+.resume-list li,
+.item-details li {
     margin-bottom: 0.1875rem;
 }
 
@@ -912,6 +925,18 @@ input.cmd-input {
     display: flex;
     flex-wrap: wrap;
     gap: 0.625rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.375rem;
+    margin-top: 0.3125rem;
+}
+
+.skill-category {
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 .skill-tag {
@@ -988,201 +1013,6 @@ input.cmd-input {
     }
 
     .meta-row .label {
-        width: 100%;
-        margin-bottom: 0.125rem;
-        font-weight: bold;
-    }
-
-    /* Taskbar adjustments */
-    .taskbar {
-        height: 2.5rem;
-    }
-
-}
-
-/* Tip Widget Styles */
-.tip-widget {
-    position: fixed;
-    bottom: 3.125rem;
-    right: 1.25rem;
-    width: 18.75rem;
-    background-color: #FFFFE0;
-    /* Light yellow like classic tooltips */
-    border: 0.125rem solid var(--dos-black);
-    box-shadow: 0.25rem 0.25rem 0rem rgba(0, 0, 0, 0.5);
-    z-index: 20000;
-    display: flex;
-    flex-direction: column;
-    animation: slideIn 0.5s ease-out;
-    color: var(--dos-black);
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.tip-header {
-    background-color: var(--dos-blue);
-    color: var(--dos-white);
-    padding: 0.25rem 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-}
-
-.tip-title {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-.tip-close-btn {
-    background: none;
-    border: none;
-    color: var(--dos-white);
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.tip-content {
-    padding: 0.9375rem;
-    font-family: 'Verdana', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-.tip-footer {
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    border-top: 0.0625rem solid #ccc;
-}
-
-.tip-ok-btn {
-    background-color: var(--dos-gray);
-    border: 0.125rem solid var(--dos-white);
-    border-right-color: var(--dos-black);
-    border-bottom-color: var(--dos-black);
-
-    .item-header h3 a {
-        color: black;
-        text-decoration: none;
-    }
-
-    .item-header h3 a:hover {
-        text-decoration: underline;
-        color: #004f90;
-    }
-
-    .item-date {
-        font-style: italic;
-        font-size: 0.9rem;
-    }
-
-    .item-subtitle {
-        font-style: italic;
-        margin-bottom: 0.3125rem;
-    }
-
-    .resume-list {
-        margin: 0.3125rem 0;
-        padding-left: 1.25rem;
-    }
-
-    .resume-list li {
-        margin-bottom: 0.1875rem;
-    }
-
-    .skills-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.625rem;
-    }
-
-    .skill-tag {
-        background-color: #f0f0f0;
-        padding: 0.125rem 0.5rem;
-        border-radius: 0.25rem;
-        font-size: 0.9rem;
-    }
-
-    /* Mobile Adjustments */
-    @media (max-width: 768px) {
-        .dos-container {
-            height: 100vh;
-            /* Fallback */
-            height: 100dvh;
-            /* Dynamic viewport height */
-        }
-
-        .window-frame {
-            width: 100% !important;
-            height: calc(100% - 2.5rem) !important;
-            top: 0 !important;
-            left: 0 !important;
-            max-width: none;
-            max-height: none;
-            transform: none !important;
-        }
-
-        .taskbar {
-            height: 2.5rem;
-        }
-
-        .taskbar-item {
-            padding: 0.3125rem 0.625rem;
-            font-size: 0.9rem;
-        }
-
-        .start-button {
-            padding: 0.3125rem 0.625rem;
-            font-size: 0.9rem;
-        }
-
-        .clock {
-            padding: 0.3125rem 0.625rem;
-            font-size: 0.9rem;
-        }
-
-        /* Adjust resume for mobile */
-        .resume-paper {
-            padding: 1.25rem;
-            min-height: auto;
-        }
-
-        .resume-header h1 {
-            font-size: 1.8rem;
-        }
-
-        .item-header {
-            flex-direction: column;
-        }
-
-        /* Adjust terminal for mobile */
-        .terminal-body {
-            font-size: 1rem;
-        }
-
-        /* Adjust project detail for mobile */
-        .project-detail {
-            padding: 0.625rem;
-        }
-
-        .meta-row {
-            flex-direction: column;
-        }
-
         width: 100%;
         margin-bottom: 0.125rem;
         font-weight: bold;
@@ -1712,6 +1542,9 @@ input.cmd-input {
     border-radius: 8px !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
     backdrop-filter: none !important;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 [data-theme="modern"] .submenu-item {
