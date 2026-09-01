@@ -11,6 +11,8 @@ import AltTabSwitcher from './AltTabSwitcher';
 import { portfolioData } from '../../data/portfolio';
 import TipWidget from '../common/TipWidget';
 import LinkedInWidget from '../apps/LinkedInWidget';
+import DesktopIcons from './DesktopIcons';
+import RecruiterWidget from '../apps/RecruiterWidget';
 import { playOpen, playMinimize } from '../../utils/soundEngine';
 
 const tips = [
@@ -92,6 +94,9 @@ const WindowManager = ({ currentTheme = 'retro', onSetTheme }) => {
 
     // LinkedIn Widget State
     const [showLinkedIn, setShowLinkedIn] = useState(true);
+
+    // Recruiter Active Desktop Card State
+    const [showRecruiterCard, setShowRecruiterCard] = useState(!isMobile);
 
     // Periodic Tip Interval
     useEffect(() => {
@@ -334,6 +339,21 @@ const WindowManager = ({ currentTheme = 'retro', onSetTheme }) => {
 
     return (
         <>
+            <DesktopIcons
+                onOpenProject={openProjectWindow}
+                onOpenResume={openResumeWindow}
+                onOpenApp={openAppWindow}
+                onToggleRecruiterWidget={() => setShowRecruiterCard(prev => !prev)}
+            />
+
+            {showRecruiterCard && (
+                <RecruiterWidget
+                    onClose={() => setShowRecruiterCard(false)}
+                    onOpenResume={openResumeWindow}
+                    onOpenProject={openProjectWindow}
+                />
+            )}
+
             {windows.map(win => (
                 !win.minimized && (
                     <Window

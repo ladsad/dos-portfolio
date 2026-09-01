@@ -2110,3 +2110,223 @@ input.cmd-input {
     color: #00f0ff !important;
 }
 
+/* ==========================================================================
+   DESKTOP ICONS GRID
+   ========================================================================== */
+.desktop-icons-container {
+    position: absolute;
+    top: 32px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 0;
+    user-select: none;
+    pointer-events: auto;
+}
+
+.desktop-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 74px;
+    padding: 6px 4px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: background 0.1s ease;
+}
+
+.desktop-icon-item:hover {
+    background: rgba(0, 0, 128, 0.2);
+}
+
+.desktop-icon-item.selected {
+    background: rgba(0, 0, 128, 0.6);
+    border: 1px dotted #ffffff;
+}
+
+.desktop-icon-item.selected .desktop-icon-label {
+    background: #000080;
+    color: #ffffff;
+}
+
+.desktop-icon-graphic {
+    font-size: 2rem;
+    line-height: 1;
+    margin-bottom: 4px;
+    filter: drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8));
+}
+
+.desktop-icon-label {
+    font-size: 0.72rem;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000000;
+    word-break: break-word;
+    line-height: 1.1;
+    padding: 1px 3px;
+    border-radius: 1px;
+}
+
+/* ==========================================================================
+   MAXIMIZED WINDOW ADJUSTMENTS
+   ========================================================================== */
+.window-frame-outer.maximized {
+    border-radius: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+}
+
+.window-frame-outer.maximized .window-frame {
+    border-radius: 0 !important;
+    height: 100% !important;
+}
+
+/* ==========================================================================
+   RECRUITER ACTIVE DESKTOP WIDGET
+   ========================================================================== */
+.recruiter-active-card {
+    position: absolute;
+    top: 36px;
+    right: 20px;
+    width: 320px;
+    background: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    z-index: 0;
+    font-family: 'Courier New', monospace;
+    user-select: none;
+}
+
+.recruiter-card-header {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #ffffff;
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.5px;
+}
+
+.recruiter-card-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recruiter-card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #d4d0c8;
+    color: #000000;
+}
+
+.recruiter-profile-summary {
+    background: #ffffff;
+    border: 2px inset #808080;
+    padding: 8px;
+}
+
+.candidate-name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #000080;
+}
+
+.candidate-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333333;
+    margin-top: 2px;
+}
+
+.candidate-meta {
+    font-size: 0.72rem;
+    color: #555555;
+    margin-top: 4px;
+}
+
+.recruiter-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.recruiter-btn {
+    padding: 5px 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-align: center;
+    background: #c0c0c0;
+    border: 2px outset #ffffff;
+    cursor: pointer;
+}
+
+.recruiter-btn:active {
+    border: 2px inset #808080;
+}
+
+.recruiter-contact-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.email-copy-btn {
+    flex: 1;
+    font-size: 0.72rem;
+    font-weight: bold;
+    padding: 4px;
+    background: #000080;
+    color: #ffffff;
+    border: 2px outset #ffffff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.email-copy-btn.copied {
+    background: #008000;
+}
+
+.linkedin-link-btn {
+    font-size: 0.72rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    background: #c0c0c0;
+    color: #000000;
+    text-decoration: none;
+    border: 2px outset #ffffff;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .desktop-icons-container {
+        top: 24px;
+        left: 8px;
+        gap: 10px;
+    }
+    .desktop-icon-item {
+        width: 60px;
+        padding: 4px 2px;
+    }
+    .desktop-icon-graphic {
+        font-size: 1.6rem;
+    }
+    .desktop-icon-label {
+        font-size: 0.65rem;
+    }
+    .recruiter-active-card {
+        display: none; /* Hide floating card on small phones to preserve space for mobile windows */
+    }
+}
+
+

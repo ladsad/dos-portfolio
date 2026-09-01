@@ -1,7 +1,7 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-// Window component with manual resize and auto-height support
 import Draggable from 'react-draggable';
-import { X, Minus, Square } from 'lucide-react';
+import { X, Minus, Square, Copy } from 'lucide-react';
+import { playClick } from '../../utils/soundEngine';
 
 const Window = ({
     id,
@@ -20,13 +20,20 @@ const Window = ({
     const nodeRef = useRef(null);
     const [size, setSize] = useState(initialSize || { width: 600, height: 'auto' });
     const [isResizing, setIsResizing] = useState(false);
+    const [isMaximized, setIsMaximized] = useState(false);
     const resizeRef = useRef(null);
 
-    // Initialize size if provided (though we default to 600x400 for now)
-    // We could pass initialSize prop if needed later.
+    const toggleMaximize = useCallback((e) => {
+        if (e) {
+            e.stopPropagation();
+        }
+        if (isMobile) return;
+        playClick();
+        setIsMaximized(prev => !prev);
+    }, [isMobile]);
 
     const handleResizeMove = useCallback((e) => {
-        if (!resizeRef.current) return;
+        if (!resizeRef.current || isMaximized) return;
         const { startX, startY, startWidth, startHeight, direction } = resizeRef.current;
 
         let newWidth = startWidth;
@@ -42,7 +49,7 @@ const Window = ({
         }
 
         setSize({ width: newWidth, height: newHeight });
-    }, []);
+    }, [isMaximized]);
 
     const handleResizeEnd = useCallback(() => {
         setIsResizing(false);
@@ -52,11 +59,11 @@ const Window = ({
     }, [handleResizeMove]);
 
     const handleResizeStart = (e, direction) => {
+        if (isMaximized) return;
         e.preventDefault();
         e.stopPropagation();
         setIsResizing(true);
 
-        // Capture current dimensions from DOM to handle 'auto' height
         const currentWidth = nodeRef.current ? nodeRef.current.offsetWidth : size.width;
         const currentHeight = nodeRef.current ? nodeRef.current.offsetHeight : size.height;
 
@@ -71,7 +78,6 @@ const Window = ({
         window.addEventListener('mouseup', handleResizeEnd);
     };
 
-    // Cleanup
     useEffect(() => {
         return () => {
             window.removeEventListener('mousemove', handleResizeMove);
@@ -83,35 +89,37 @@ const Window = ({
         <Draggable
             handle=".window-header"
             defaultPosition={initialPosition}
+            position={isMaximized ? { x: 0, y: 0 } : undefined}
             onMouseDown={onFocus}
-
             nodeRef={nodeRef}
             bounds="parent"
-            disabled={isResizing || isMobile} // Disable dragging while resizing or on mobile
+            disabled={isResizing || isMobile || isMaximized}
         >
             <div
                 ref={nodeRef}
-                className={`window-frame-outer ${isActive ? 'active' : ''} ${className}`}
+                className={`window-frame-outer ${isActive ? 'active' : ''} ${isMaximized ? 'maximized' : ''} ${className}`}
                 style={{
                     zIndex,
-                    position: 'absolute',
-                    width: isMobile ? '100%' : size.width,
-                    height: isMobile ? 'calc(100% - 40px)' : size.height,
-                    maxHeight: isMobile ? 'none' : (size.height === 'auto' ? '80vh' : 'none')
+                    position: isMaximized ? 'fixed' : 'absolute',
+                    top: isMaximized ? 0 : undefined,
+                    left: isMaximized ? 0 : undefined,
+                    width: isMobile || isMaximized ? '100%' : size.width,
+                    height: isMobile || isMaximized ? 'calc(100vh - 40px)' : size.height,
+                    maxHeight: isMobile || isMaximized ? 'none' : (size.height === 'auto' ? '80vh' : 'none')
                 }}
                 onClick={onFocus}
             >
                 <div className={`window-frame ${isActive ? 'active' : ''}`} style={{ width: '100%', height: '100%' }}>
-                    <div className="window-header">
+                    <div className="window-header" onDoubleClick={toggleMaximize}>
                         <span className="window-title">{title}</span>
                         <div className="window-controls">
-                            <button onClick={(e) => { e.stopPropagation(); onMinimize(id); }} className="control-btn">
+                            <button onClick={(e) => { e.stopPropagation(); onMinimize(id); }} className="control-btn" title="Minimize">
                                 <Minus size={14} />
                             </button>
-                            <button className="control-btn" disabled>
-                                <Square size={12} />
+                            <button onClick={toggleMaximize} className="control-btn" title={isMaximized ? "Restore" : "Maximize"}>
+                                {isMaximized ? <Copy size={11} /> : <Square size={12} />}
                             </button>
-                            <button onClick={(e) => { e.stopPropagation(); onClose(id); }} className="control-btn close-btn">
+                            <button onClick={(e) => { e.stopPropagation(); onClose(id); }} className="control-btn close-btn" title="Close">
                                 <X size={14} />
                             </button>
                         </div>
@@ -120,8 +128,7 @@ const Window = ({
                         {children}
                     </div>
 
-                    {/* Resize Handles */}
-                    {!isMobile && (
+                    {!isMobile && !isMaximized && (
                         <>
                             <div className="resize-handle resize-handle-r" onMouseDown={(e) => handleResizeStart(e, 'r')} />
                             <div className="resize-handle resize-handle-b" onMouseDown={(e) => handleResizeStart(e, 'b')} />
