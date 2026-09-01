@@ -40,9 +40,25 @@ const ProjectDetail = ({ project }) => {
                             <div className="info-row">
                                 <span className="label">ACCESS:</span>
                                 <a href={project.link} target="_blank" rel="noopener noreferrer" className="value link">
-                                    [LINK]
+                                    [GITHUB REPO]
                                 </a>
                             </div>
+                            {project.link && (
+                                <div className="info-row" style={{ marginTop: '6px' }}>
+                                    <button
+                                        className="retro-btn-sm"
+                                        style={{ fontSize: '0.75rem', width: '100%' }}
+                                        onClick={(e) => {
+                                            navigator.clipboard.writeText(`git clone ${project.link}.git`);
+                                            const origText = e.target.innerText;
+                                            e.target.innerText = 'COPIED TO CLIPBOARD!';
+                                            setTimeout(() => { e.target.innerText = origText; }, 2000);
+                                        }}
+                                    >
+                                        📋 Copy git clone
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
 

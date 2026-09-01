@@ -10,18 +10,27 @@ const ResumeViewer = () => {
 
     return (
         <div className="resume-viewer">
+            <div className="resume-toolbar no-print">
+                <button
+                    className="retro-btn-sm"
+                    onClick={() => window.print()}
+                    title="Print CV or Save as PDF"
+                >
+                    🖨️ Print / Save as PDF
+                </button>
+                <span className="resume-hint">Tip: Use browser Print dialog to save as PDF.</span>
+            </div>
             <div className="resume-paper">
                 {/* Header */}
                 <header className="resume-header">
                     <h1>{header.name}</h1>
                     <div className="contact-info">
-                        <span> {header.location}</span>
-                        <span> <a href={`mailto:${header.email}`}>{header.email}</a></span>
-                        <span> <a href={header.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
-                        <span> <a href={header.github} target="_blank" rel="noopener noreferrer">GitHub</a></span>
+                        <span>📍 {header.location}</span>
+                        <span>✉️ <a href={`mailto:${header.email}`}>{header.email}</a></span>
+                        <span>💼 <a href={header.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+                        <span>🐙 <a href={header.github} target="_blank" rel="noopener noreferrer">GitHub</a></span>
                     </div>
                 </header>
-
                 <hr className="resume-divider" />
 
                 {/* Education */}

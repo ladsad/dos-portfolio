@@ -3,12 +3,15 @@ import Window from './Window';
 import Terminal from '../apps/Terminal';
 import ProjectDetail from '../apps/ProjectDetail';
 import ResumeViewer from '../apps/ResumeViewer';
+import Minesweeper from '../apps/Minesweeper';
+import DisplaySettings from '../apps/DisplaySettings';
 import StartMenu from './StartMenu';
 import Taskbar from './Taskbar';
 import AltTabSwitcher from './AltTabSwitcher';
 import { portfolioData } from '../../data/portfolio';
 import TipWidget from '../common/TipWidget';
 import LinkedInWidget from '../apps/LinkedInWidget';
+import { playOpen, playMinimize } from '../../utils/soundEngine';
 
 const tips = [
     "Press Shift+Tab to switch between windows quickly!",
@@ -54,7 +57,7 @@ const playDing = () => {
  * WindowManager Component
  * Manages the state and rendering of all windows, taskbar, start menu, and alt-tab switcher.
  */
-const WindowManager = () => {
+const WindowManager = ({ currentTheme = 'retro', onSetTheme }) => {
     // State initialization
     const [windows, setWindows] = useState(() => {
         const termWidth = 600;
@@ -120,6 +123,7 @@ const WindowManager = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
     const bringToFront = React.useCallback((id) => {
         setActiveWindowId(id);
         setWindows(prev => prev.map(w =>
@@ -134,23 +138,8 @@ const WindowManager = () => {
 
         if (!project) return false;
 
-        setWindows(prev => {
-            const existingWindow = prev.find(w => w.id === `project-${project.name}`);
-            if (existingWindow) {
-                // We need to bring to front, but we can't call bringToFront inside setWindows updater.
-                // So we handle it after or return updated state here.
-                // Actually, we can just return the state with updated zIndex here?
-                // But nextZIndex is in outer scope.
-                // Let's just check existence outside.
-                return prev;
-            }
-            return prev;
-        });
+        playOpen();
 
-        // We need to check existence based on current 'windows' state.
-        // But 'windows' is a dependency if we use it.
-        // Let's use the functional update pattern carefully or just depend on 'windows'.
-        // Depending on 'windows' is fine.
         const existingWindow = windows.find(w => w.id === `project-${project.name}`);
         if (existingWindow) {
             bringToFront(existingWindow.id);
@@ -179,6 +168,7 @@ const WindowManager = () => {
 
     // Open the resume window
     const openResumeWindow = React.useCallback(() => {
+        playOpen();
         const existingWindow = windows.find(w => w.id === 'resume');
         if (existingWindow) {
             bringToFront('resume');
@@ -200,6 +190,52 @@ const WindowManager = () => {
         }
     }, [windows, nextZIndex, isMobile, bringToFront]);
 
+    // Open generic utility apps (Minesweeper, Display Settings)
+    const openAppWindow = React.useCallback((appType) => {
+        playOpen();
+        if (appType === 'minesweeper') {
+            const existingWindow = windows.find(w => w.id === 'minesweeper');
+            if (existingWindow) {
+                bringToFront('minesweeper');
+                if (existingWindow.minimized) {
+                    setWindows(prev => prev.map(w => w.id === 'minesweeper' ? { ...w, minimized: false } : w));
+                }
+            } else {
+                setWindows(prev => [...prev, {
+                    id: 'minesweeper',
+                    type: 'minesweeper',
+                    title: 'Minesweeper',
+                    zIndex: nextZIndex,
+                    minimized: false,
+                    initialPosition: isMobile ? { x: 10, y: 10 } : { x: 120, y: 80 },
+                    initialSize: { width: 340, height: 440 }
+                }]);
+                setNextZIndex(prev => prev + 1);
+                setActiveWindowId('minesweeper');
+            }
+        } else if (appType === 'settings') {
+            const existingWindow = windows.find(w => w.id === 'settings');
+            if (existingWindow) {
+                bringToFront('settings');
+                if (existingWindow.minimized) {
+                    setWindows(prev => prev.map(w => w.id === 'settings' ? { ...w, minimized: false } : w));
+                }
+            } else {
+                setWindows(prev => [...prev, {
+                    id: 'settings',
+                    type: 'settings',
+                    title: 'Display & Sound Properties',
+                    zIndex: nextZIndex,
+                    minimized: false,
+                    initialPosition: isMobile ? { x: 10, y: 10 } : { x: 180, y: 100 },
+                    initialSize: { width: 440, height: 460 }
+                }]);
+                setNextZIndex(prev => prev + 1);
+                setActiveWindowId('settings');
+            }
+        }
+    }, [windows, nextZIndex, isMobile, bringToFront]);
+
     // Close a window
     const closeWindow = React.useCallback((id) => {
         if (id === 'terminal') return;
@@ -211,6 +247,7 @@ const WindowManager = () => {
 
     // Minimize a window
     const minimizeWindow = React.useCallback((id) => {
+        playMinimize();
         setWindows(prev => prev.map(w => w.id === id ? { ...w, minimized: true } : w));
         if (activeWindowId === id) {
             setActiveWindowId(null);
@@ -316,10 +353,22 @@ const WindowManager = () => {
                         {win.type === 'terminal' ? (
                             <Terminal
                                 onOpenProject={openProjectWindow}
+                                onOpenApp={openAppWindow}
+                                onSetTheme={onSetTheme}
                                 onClear={() => { }}
                             />
                         ) : win.type === 'resume' ? (
                             <ResumeViewer />
+                        ) : win.type === 'minesweeper' ? (
+                            <Minesweeper />
+                        ) : win.type === 'settings' ? (
+                            <DisplaySettings
+                                currentTheme={currentTheme}
+                                onSave={(cfg) => {
+                                    if (onSetTheme) onSetTheme(cfg.theme);
+                                    closeWindow('settings');
+                                }}
+                            />
                         ) : (
                             <ProjectDetail project={win.content} />
                         )}
@@ -339,6 +388,7 @@ const WindowManager = () => {
                 onClose={() => setIsStartMenuOpen(false)}
                 onOpenProject={openProjectWindow}
                 onOpenResume={openResumeWindow}
+                onOpenApp={openAppWindow}
                 onSystemAction={handleSystemAction}
                 portfolioData={portfolioData}
             />
@@ -349,6 +399,7 @@ const WindowManager = () => {
                 isStartMenuOpen={isStartMenuOpen}
                 onToggleStartMenu={() => setIsStartMenuOpen(!isStartMenuOpen)}
                 onWindowClick={handleTaskbarWindowClick}
+                onOpenSettings={() => openAppWindow('settings')}
             />
 
             {showTip && (

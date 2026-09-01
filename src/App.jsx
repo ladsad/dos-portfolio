@@ -35,7 +35,7 @@ function App() {
         />
       ) : (
         <Layout theme={theme}>
-          <WindowManager />
+          <WindowManager currentTheme={theme} onSetTheme={setTheme} />
         </Layout>
       )}
     </>

@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { portfolioData } from '../../data/portfolio';
+import { playClick, playFloppySeek, playError } from '../../utils/soundEngine';
+
+const COMMANDS = [
+    'about', 'education', 'experience', 'projects', 'open', 'skills', 
+    'awards', 'neofetch', 'minesweeper', 'matrix', 'theme', 'clear', 'help'
+];
 
 const PROJECT_ALIASES = {
     // New projects
@@ -105,13 +111,16 @@ const resolveProject = (query) => {
     return null;
 };
 
-const Terminal = ({ onOpenProject }) => {
+const Terminal = ({ onOpenProject, onOpenApp, onSetTheme }) => {
     const [input, setInput] = useState('');
     const [history, setHistory] = useState([
-        { type: 'output', content: 'Welcome to Shaurya Kumar\'s Portfolio.' },
-        { type: 'output', content: 'Type "help" to see available commands.' },
+        { type: 'output', content: 'Welcome to Shaurya Kumar\'s Retro Portfolio (Salad OS 98).' },
+        { type: 'output', content: 'Type "help" for commands, "neofetch" for system info, or "minesweeper" to play.' },
         { type: 'output', content: ' ' }
     ]);
+    const [cmdHistory, setCmdHistory] = useState([]);
+    const [historyPointer, setHistoryPointer] = useState(-1);
+
     const bottomRef = useRef(null);
     const inputRef = useRef(null);
 
@@ -123,24 +132,92 @@ const Terminal = ({ onOpenProject }) => {
 
     const handleCommand = (cmd) => {
         const trimmedCmd = cmd.trim();
+        if (trimmedCmd) {
+            setCmdHistory(prev => [...prev, trimmedCmd]);
+        }
+        setHistoryPointer(-1);
+
         const args = trimmedCmd.split(' ');
         const command = args[0].toLowerCase();
         const newHistory = [...history, { type: 'input', content: cmd }];
+
+        playClick();
 
         switch (command) {
             case 'help':
                 newHistory.push({
                     type: 'output',
                     content: `Available commands:
-  about       - Display summary and contact info
-  education   - Show education details
-  experience  - Show work experience
-  projects    - List highlighted projects
-  open <name> - Open a project window (e.g., "open microsegnet")
-  skills      - List technical skills
-  awards      - Show awards and leadership
-  clear       - Clear the terminal screen
-  help        - Show this help message`
+  about         - Display contact info and links
+  education     - Show education & coursework
+  experience    - Show work experience & achievements
+  projects      - List highlighted projects
+  open <name>   - Open project window (e.g., "open kestrel", "open riskshield")
+  skills        - List technical skills & toolchains
+  awards        - Show certifications and honors
+  neofetch      - Display retro ASCII hardware & stack info
+  minesweeper   - Launch Windows 98 Minesweeper game
+  matrix        - Toggle matrix code sequence
+  theme <name>  - Set theme (retro, amber, matrix, cyberpunk, modern)
+  clear / cls   - Clear terminal screen
+  help          - Show this help menu`
+                });
+                break;
+
+            case 'neofetch':
+                newHistory.push({
+                    type: 'output',
+                    content: `
+      .----------------.     shaurya@salad-os-98
+     | .--------------. |    -------------------
+     | |  /\\_/\\       | |    OS: Salad OS 98 (Build 2026.2)
+     | | ( o.o )  AI  | |    Host: VIT Chennai / New Delhi
+     | |  > ^ <       | |    Uptime: 199 epochs, 42 minutes
+     | '----------------' |  Shell: DOS Command Interpreter
+      '----------------'     Memory: 640 KB Base / 32 MB XMS
+                             Architecture: Distributed ML & Full-Stack
+                             Flagship: RiskShield, Kestrel, Pitwall, Confoundr
+                             GitHub: https://github.com/ladsad
+                             LinkedIn: https://linkedin.com/in/shaurya-kumar-22262b236`
+                });
+                break;
+
+            case 'minesweeper':
+            case 'game':
+            case 'winmine':
+                if (onOpenApp) {
+                    onOpenApp('minesweeper');
+                    newHistory.push({ type: 'output', content: 'Launching Minesweeper (winmine.exe)...' });
+                }
+                break;
+
+            case 'theme': {
+                const requestedTheme = args[1]?.toLowerCase();
+                const validThemes = ['retro', 'amber', 'matrix', 'cyberpunk', 'modern'];
+                if (!requestedTheme || !validThemes.includes(requestedTheme)) {
+                    newHistory.push({
+                        type: 'output',
+                        content: `Usage: theme <name>\nValid themes: ${validThemes.join(', ')}`
+                    });
+                } else {
+                    localStorage.setItem('displayMode', requestedTheme);
+                    if (onSetTheme) onSetTheme(requestedTheme);
+                    newHistory.push({
+                        type: 'output',
+                        content: `Display theme set to "${requestedTheme.toUpperCase()}".`
+                    });
+                }
+                break;
+            }
+
+            case 'matrix':
+                newHistory.push({
+                    type: 'output',
+                    content: `01000001 01001001 00100000 01010011 01111001 01110011 01110100 01100101 01101101 01110011
+Wake up, Neo...
+The Matrix has you.
+Follow the white rabbit.
+Knock, knock, Neo.`
                 });
                 break;
 
@@ -216,6 +293,7 @@ ${exp.highlights.map(h => `  * ${h}`).join('\n')}
                 } else {
                     const matchedProject = resolveProject(projectName);
                     const targetName = matchedProject ? matchedProject.name : projectName;
+                    playFloppySeek();
                     const success = onOpenProject(targetName);
                     if (success) {
                         newHistory.push({
@@ -223,9 +301,10 @@ ${exp.highlights.map(h => `  * ${h}`).join('\n')}
                             content: `Opening project "${targetName}"...`
                         });
                     } else {
+                        playError();
                         newHistory.push({
                             type: 'output',
-                            content: `Project "${projectName}" not found.`
+                            content: `Project "${projectName}" not found. Type "projects" for a complete list.`
                         });
                     }
                 }
@@ -256,6 +335,7 @@ AI / AGENTIC:  ${portfolioData.skills.ai_integration}
                 break;
 
             case 'clear':
+            case 'cls':
                 setHistory([]);
                 return;
 
@@ -263,6 +343,7 @@ AI / AGENTIC:  ${portfolioData.skills.ai_integration}
                 break;
 
             default:
+                playError();
                 newHistory.push({
                     type: 'output',
                     content: `Command not found: "${command}". Type "help" for available commands.`
@@ -276,6 +357,42 @@ AI / AGENTIC:  ${portfolioData.skills.ai_integration}
         if (e.key === 'Enter') {
             handleCommand(input);
             setInput('');
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (cmdHistory.length === 0) return;
+            const nextPointer = historyPointer === -1 ? cmdHistory.length - 1 : Math.max(0, historyPointer - 1);
+            setHistoryPointer(nextPointer);
+            setInput(cmdHistory[nextPointer] || '');
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (cmdHistory.length === 0 || historyPointer === -1) return;
+            const nextPointer = historyPointer + 1;
+            if (nextPointer >= cmdHistory.length) {
+                setHistoryPointer(-1);
+                setInput('');
+            } else {
+                setHistoryPointer(nextPointer);
+                setInput(cmdHistory[nextPointer] || '');
+            }
+        } else if (e.key === 'Tab') {
+            e.preventDefault();
+            const current = input.trim().toLowerCase();
+            if (!current) return;
+
+            if (current.startsWith('open ')) {
+                const subQuery = current.slice(5).trim();
+                const projectMatches = portfolioData.projects
+                    .map(p => p.name)
+                    .filter(name => name.toLowerCase().includes(subQuery) || name.toLowerCase().startsWith(subQuery));
+                if (projectMatches.length > 0) {
+                    setInput(`open ${projectMatches[0]}`);
+                }
+            } else {
+                const matches = COMMANDS.filter(cmd => cmd.startsWith(current));
+                if (matches.length > 0) {
+                    setInput(matches[0]);
+                }
+            }
         }
     };
 

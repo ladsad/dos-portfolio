@@ -1,13 +1,16 @@
 import React from 'react';
 
 const Layout = ({ children, theme = 'retro' }) => {
+    const showScanlines = typeof window !== 'undefined' ? localStorage.getItem('crtScanlines') !== 'false' : true;
+    const showFlicker = typeof window !== 'undefined' ? localStorage.getItem('crtFlicker') !== 'false' : true;
+
     return (
         <div className="dos-container" data-theme={theme}>
-            <div className="scanlines"></div>
-            <div className="crt-flicker"></div>
+            {showScanlines && <div className="scanlines"></div>}
+            {showFlicker && <div className="crt-flicker"></div>}
             {theme === 'retro' && (
                 <div className="dos-header">
-                    DOS-PORTFOLIO [Version 1.0.0] - (C) Copyright 2025 Shaurya Kumar
+                    DOS-PORTFOLIO [Version 2.4.0] - (C) Copyright 2026 Shaurya Kumar
                 </div>
             )}
             {children}
